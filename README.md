@@ -47,15 +47,39 @@ Every skill writes a structured output file to `./founder-outputs/`. Downstream 
 claude plugin add /path/to/founder-skills
 ```
 
-### Manual install (symlink)
+### Multi-platform install
+
+The setup script auto-detects installed coding agents and installs the appropriate format for each:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/founder-skills.git
 cd founder-skills
-./setup --global   # installs to ~/.claude/skills/
-# or
-./setup --local    # installs to ./.claude/skills/ in current project
+./setup --auto     # detect and install for all found agents
 ```
+
+Or install for specific platforms:
+
+```bash
+./setup --claude global   # Claude Code — symlink to ~/.claude/skills/
+./setup --claude local    # Claude Code — symlink to ./.claude/skills/
+./setup --codex           # Codex CLI — generate AGENTS.md
+./setup --cursor          # Cursor — generate .cursorrules
+./setup --kiro            # Kiro — copy SKILL.md to ~/.kiro/skills/
+./setup --opencode        # OpenCode — copy SKILL.md to .opencode/skills/
+./setup --windsurf        # Windsurf — generate .windsurf/rules/
+./setup --all             # install for every supported platform
+```
+
+### Supported Platforms
+
+| Platform | Format Generated | Install Location |
+|---|---|---|
+| Claude Code | `SKILL.md` (native) | `~/.claude/skills/` or `.claude/skills/` |
+| Codex CLI | `AGENTS.md` (plain markdown) | project root |
+| Cursor | `.cursorrules` (markdown) | project root |
+| Kiro | `SKILL.md` (copied) | `~/.kiro/skills/` |
+| OpenCode | `SKILL.md` (copied) | `.opencode/skills/` |
+| Windsurf | `.windsurf/rules/*.md` | project root |
 
 ## Skills Reference
 
