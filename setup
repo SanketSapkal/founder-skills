@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SKILLS_DIR="$SCRIPT_DIR/skills"
+
+usage() {
+  echo "Usage: ./setup [--global | --local]"
+  echo ""
+  echo "  --global    Install to ~/.claude/skills/ (available in all projects)"
+  echo "  --local     Install to ./.claude/skills/ (available in this project only)"
+  echo ""
+  echo "If no flag is given, you will be prompted to choose."
+}
+
+install_skills() {
+  local target_dir="$1"
+  local skill_count=0
+
+  mkdir -p "$target_dir"
+
+  for skill_dir in "$SKILLS_DIR"/*/; do
+    skill_name="$(basename "$skill_dir")"
+    target="$target_dir/$skill_name"
+
+    if [ -L "$target" ]; then
+      rm "$target"
+    elif [ -d "$target" ]; then
+      echo "  Skipping $skill_name — directory already exists (not a symlink)"
+      continue
+    fi
+
+    ln -s "$skill_dir" "$target"
+    skill_count=$((skill_count + 1))
+    echo "  Linked $skill_name"
+  done
+
+  echo ""
+  echo "Installed $skill_count skills to $target_dir"
+}
+
+create_outputs_dir() {
+  if [ ! -d "./founder-outputs" ]; then
+    mkdir -p "./founder-outputs"
+    echo "Created ./founder-outputs/ directory"
+  fi
+}
+
+print_claude_md_snippet() {
+  echo ""
+  echo "────────────────────────────────────────────────────"
+  echo "Add this to your project's CLAUDE.md:"
+  echo "────────────────────────────────────────────────────"
+  cat <<'SNIPPET'
+
+## Founder Skills Pipeline
+
+This project uses the founder-skills pipeline for idea validation.
+
+### Output Directory
+All skill outputs are saved to `./founder-outputs/`. Each skill reads
+prior outputs from this directory to build on earlier analysis.
+
+### Pipeline Sequence
+1. `/pressure-test` — Adversarial interrogation (run first)
+2. `/scope-mode` — Calibrate ambition level
+3. `/customer-archetype` — Define the specific customer
+4. `/market-size` — Bottom-up TAM/SAM/SOM
+5. `/startup-canvas` — Business model + value proposition
+6. `/battle-cards` — Competitive intelligence
+7. `/assumption-map` — Risk prioritization
+8. `/pretotype` — Validation experiments
+9. `/verdict` — BUILD / KILL / PIVOT judgment
+
+### Key Principle
+Every skill writes a structured output file. The next skill reads it.
+`/verdict` reads ALL outputs and synthesizes a final judgment.
+
+SNIPPET
+  echo "────────────────────────────────────────────────────"
+}
+
+# Parse arguments
+if [ $# -gt 0 ]; then
+  case "$1" in
+    --global)
+      TARGET="$HOME/.claude/skills"
+      ;;
+    --local)
+      TARGET="./.claude/skills"
+      ;;
+    --help|-h)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1"
+      usage
+      exit 1
+      ;;
+  esac
+else
+  echo "Where should founder-skills be installed?"
+  echo ""
+  echo "  1) Global  (~/.claude/skills/) — available in all projects"
+  echo "  2) Local   (./.claude/skills/) — available in this project only"
+  echo ""
+  read -rp "Choose [1/2]: " choice
+  case "$choice" in
+    1) TARGET="$HOME/.claude/skills" ;;
+    2) TARGET="./.claude/skills" ;;
+    *)
+      echo "Invalid choice. Exiting."
+      exit 1
+      ;;
+  esac
+fi
+
+echo ""
+echo "Installing founder-skills..."
+echo ""
+install_skills "$TARGET"
+create_outputs_dir
+print_claude_md_snippet
+echo ""
+echo "Done. Start with: /pressure-test"
