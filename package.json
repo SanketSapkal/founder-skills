@@ -1,0 +1,39 @@
+{
+  "name": "founder-skills",
+  "version": "0.1.0",
+  "description": "Adversarial startup idea interrogation pipeline for Claude Code, Codex, Cursor, Kiro, OpenCode, and Windsurf",
+  "bin": {
+    "founder-skills": "./setup"
+  },
+  "files": [
+    "setup",
+    "skills/",
+    ".claude-plugin/"
+  ],
+  "keywords": [
+    "claude-code",
+    "claude-plugin",
+    "cursor-rules",
+    "codex",
+    "windsurf",
+    "kiro",
+    "ai-agents",
+    "startup",
+    "founder",
+    "lean-startup",
+    "business-model",
+    "idea-validation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SanketSapkal/founder-skills.git"
+  },
+  "homepage": "https://github.com/SanketSapkal/founder-skills#readme",
+  "bugs": {
+    "url": "https://github.com/SanketSapkal/founder-skills/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  }
+}

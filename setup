@@ -4,6 +4,10 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SKILLS_DIR="$SCRIPT_DIR/skills"
 
+# Detect npx context: npm sets npm_config_cache in the environment for all npm operations
+NPX_MODE=false
+[ -n "${npm_config_cache:-}" ] && NPX_MODE=true
+
 # ──────────────────────────────────────────────────────────────
 # Platform detection
 # ──────────────────────────────────────────────────────────────
@@ -70,7 +74,12 @@ install_claude() {
       continue
     fi
 
-    ln -s "$skill_dir" "$target"
+    # npx installs from the npm cache — symlinks to cache paths break when cache is cleared
+    if [ "$NPX_MODE" = "true" ]; then
+      cp -r "$skill_dir" "$target"
+    else
+      ln -s "$skill_dir" "$target"
+    fi
     count=$((count + 1))
   done
 
@@ -268,15 +277,18 @@ explicit BUILD / KILL / PIVOT judgment.
 
 ## Pipeline Sequence
 
-1. `/pressure-test` — Adversarial interrogation (run first)
-2. `/scope-mode` — Calibrate ambition level
-3. `/customer-archetype` — Define the specific customer
-4. `/market-size` — Bottom-up TAM/SAM/SOM
-5. `/startup-canvas` — Business model + value proposition
-6. `/battle-cards` — Competitive intelligence
-7. `/assumption-map` — Risk prioritization
-8. `/pretotype` — Validation experiments
-9. `/verdict` — BUILD / KILL / PIVOT judgment
+1.  `/pressure-test` — Adversarial interrogation (run first)
+2.  `/customer-archetype` — Define the specific customer
+3.  `/founder-fit` — Assess founder-market fit
+4.  `/scope-mode` — Calibrate ambition level
+5.  `/market-size` — Bottom-up TAM/SAM/SOM
+6.  `/startup-canvas` — Business model + value proposition
+7.  `/unit-economics` — CAC / LTV / payback / gross margin
+8.  `/regulatory-risk` — Compliance exposure (regulated industries)
+9.  `/battle-cards` — Competitive intelligence
+10. `/assumption-map` — Risk prioritization
+11. `/pretotype` — Validation experiments
+12. `/verdict` — BUILD / KILL / PIVOT judgment
 OVERVIEW
 
   local count=1 # counting the overview file
@@ -325,8 +337,9 @@ print_post_install() {
     cat <<'SNIPPET'
   ## Founder Skills Pipeline
   All skill outputs are saved to `./founder-outputs/`.
-  Pipeline: /pressure-test → /scope-mode → /customer-archetype →
-  /market-size → /startup-canvas → /battle-cards → /assumption-map →
+  Pipeline: /pressure-test → /customer-archetype → /founder-fit →
+  /scope-mode → /market-size → /startup-canvas → /unit-economics →
+  /regulatory-risk → /battle-cards → /assumption-map →
   /pretotype → /verdict → /build-brief
 SNIPPET
     echo ""
@@ -340,6 +353,7 @@ SNIPPET
 usage() {
   cat <<'USAGE'
 Usage: ./setup [OPTIONS]
+       npx founder-skills [OPTIONS]
 
 Install founder-skills for your coding agent(s).
 
@@ -354,9 +368,13 @@ Options:
   --all               Install for all supported platforms
   -h, --help          Show this help
 
-If no flags are given, you will be prompted to choose.
+If no flags are given, auto-detects installed agents and prompts to confirm.
+When run via npx, defaults to --auto (no prompt).
 
 Examples:
+  npx founder-skills              # auto-detect and install (npx, no prompt)
+  npx founder-skills --claude     # Claude Code global install via npx
+  npx founder-skills --all        # install for every supported platform via npx
   ./setup --auto                  # detect and install for all found agents
   ./setup --claude global         # Claude Code global install
   ./setup --claude local          # Claude Code project-local install
@@ -415,6 +433,22 @@ run_install() {
 
 # Parse arguments
 if [ $# -eq 0 ]; then
+  # When run via npx, skip the prompt and go straight to auto-detect
+  if [ "$NPX_MODE" = "true" ]; then
+    detect_platforms
+    if [ ${#PLATFORMS[@]} -eq 0 ]; then
+      echo "No coding agents detected on PATH."
+      echo "Run with --all to install for every supported platform, or --help for options."
+      exit 1
+    fi
+    targets=()
+    for p in "${PLATFORMS[@]}"; do
+      [ "$p" = "claude" ] && targets+=("claude-global") || targets+=("$p")
+    done
+    run_install "${targets[@]}"
+    exit 0
+  fi
+
   # Interactive mode
   detect_platforms
 
