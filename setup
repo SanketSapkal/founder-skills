@@ -157,7 +157,9 @@ explicit BUILD / KILL / PIVOT judgment.
 
 ## Pipeline Sequence
 
-1.  `/pressure-test` — Adversarial interrogation (run first)
+0a. `/problem-discovery` — (optional) Surface candidate problems
+0b. `/problem-statement` — (optional) Polish vague problem before pressure-testing
+1.  `/pressure-test` — Adversarial interrogation (run first if you have an idea)
 2.  `/customer-archetype` — Define the specific customer
 3.  `/founder-fit` — Assess founder-market fit
 4.  `/scope-mode` — Calibrate ambition level
@@ -169,6 +171,10 @@ explicit BUILD / KILL / PIVOT judgment.
 10. `/assumption-map` — Risk prioritization
 11. `/pretotype` — Validation experiments
 12. `/verdict` — BUILD / KILL / PIVOT judgment
+
+Note: if you run `/problem-discovery` or `/problem-statement`, switch to a
+fresh Claude Code conversation before `/pressure-test` to avoid bias —
+the agent that helped shape the problem will tend to validate it.
 13. `/build-brief` — Implementation handoff for coding agents
 14. `/pitch-deck` — Investor pitch narrative
 15. `/gtm-plan` — Go-to-market channel strategy
@@ -179,6 +185,7 @@ HEADER
 
     # Core pipeline skills first, then extensions, then pitch, then marketing
     local order=(
+      problem-discovery problem-statement
       pressure-test customer-archetype founder-fit scope-mode market-size
       startup-canvas unit-economics regulatory-risk battle-cards assumption-map pretotype verdict
       build-brief pivot-paths 10x-why-now analogous-cos
@@ -221,7 +228,9 @@ explicit BUILD / KILL / PIVOT judgment.
 
 ## Pipeline Sequence
 
-1.  `/pressure-test` — Adversarial interrogation (run first)
+0a. `/problem-discovery` — (optional) Surface candidate problems
+0b. `/problem-statement` — (optional) Polish vague problem before pressure-testing
+1.  `/pressure-test` — Adversarial interrogation (run first if you have an idea)
 2.  `/customer-archetype` — Define the specific customer
 3.  `/founder-fit` — Assess founder-market fit
 4.  `/scope-mode` — Calibrate ambition level
@@ -234,11 +243,16 @@ explicit BUILD / KILL / PIVOT judgment.
 11. `/pretotype` — Validation experiments
 12. `/verdict` — BUILD / KILL / PIVOT judgment
 
+Note: if you run `/problem-discovery` or `/problem-statement`, switch to a
+fresh Claude Code conversation before `/pressure-test` to avoid bias —
+the agent that helped shape the problem will tend to validate it.
+
 ---
 
 HEADER
 
     local order=(
+      problem-discovery problem-statement
       pressure-test customer-archetype founder-fit scope-mode market-size
       startup-canvas unit-economics regulatory-risk battle-cards assumption-map pretotype verdict
       build-brief pivot-paths 10x-why-now analogous-cos
@@ -277,7 +291,9 @@ explicit BUILD / KILL / PIVOT judgment.
 
 ## Pipeline Sequence
 
-1.  `/pressure-test` — Adversarial interrogation (run first)
+0a. `/problem-discovery` — (optional) Surface candidate problems
+0b. `/problem-statement` — (optional) Polish vague problem before pressure-testing
+1.  `/pressure-test` — Adversarial interrogation (run first if you have an idea)
 2.  `/customer-archetype` — Define the specific customer
 3.  `/founder-fit` — Assess founder-market fit
 4.  `/scope-mode` — Calibrate ambition level
@@ -289,6 +305,10 @@ explicit BUILD / KILL / PIVOT judgment.
 10. `/assumption-map` — Risk prioritization
 11. `/pretotype` — Validation experiments
 12. `/verdict` — BUILD / KILL / PIVOT judgment
+
+Note: if you run `/problem-discovery` or `/problem-statement`, switch to a
+fresh Claude Code conversation before `/pressure-test` to avoid bias —
+the agent that helped shape the problem will tend to validate it.
 OVERVIEW
 
   local count=1 # counting the overview file
@@ -337,6 +357,8 @@ print_post_install() {
     cat <<'SNIPPET'
   ## Founder Skills Pipeline
   All skill outputs are saved to `./founder-outputs/`.
+  Optional pre-pipeline: /problem-discovery → /problem-statement
+  (run pressure-test in a fresh conversation after these to avoid bias)
   Pipeline: /pressure-test → /customer-archetype → /founder-fit →
   /scope-mode → /market-size → /startup-canvas → /unit-economics →
   /regulatory-risk → /battle-cards → /assumption-map →

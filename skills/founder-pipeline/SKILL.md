@@ -11,7 +11,9 @@ An adversarial idea interrogation pipeline that pressure-tests startup ideas bef
 ## Pipeline Sequence
 
 ```
-1.  /pressure-test      ──> Adversarial interrogation (run first, always)
+0a. /problem-discovery  ──> (optional) Surface candidate problems if no specific idea yet
+0b. /problem-statement  ──> (optional) Polish a vague problem before pressure-testing
+1.  /pressure-test      ──> Adversarial interrogation (run first if you have an idea)
 2.  /customer-archetype ──> Define the specific customer (upstream of modeling)
 3.  /founder-fit        ──> Assess founder-market fit and unfair advantage
 4.  /scope-mode         ──> Calibrate ambition: EXPAND / SELECTIVE / HOLD / REDUCE
@@ -24,6 +26,8 @@ An adversarial idea interrogation pipeline that pressure-tests startup ideas bef
 11. /pretotype          ──> Design validation experiments
 12. /verdict            ──> BUILD / KILL / PIVOT synthesis (reads all outputs)
 ```
+
+**Bias warning for `/problem-discovery` and `/problem-statement`:** these skills help shape the problem and are not adversarial. After running them, switch to a fresh Claude Code conversation before running `/pressure-test` so the adversarial review is not biased by the agent that just helped produce the framing.
 
 After verdict:
 - `/build-brief` — if BUILD, produce a structured handoff for coding agents
@@ -73,6 +77,8 @@ verdict (KILL/PIVOT) ───────────────────�
 
 | Skill | Output File | Key Rating |
 |---|---|---|
+| `/problem-discovery` | `problem-discovery-output.md` | State: CANDIDATES IDENTIFIED |
+| `/problem-statement` | `problem-statement-output.md` | Quality: SHARP / VAGUE / COMPOUND |
 | `/pressure-test` | `pressure-test-output.md` | Demand: STRONG / WEAK / UNCLEAR |
 | `/customer-archetype` | `customer-archetype-output.md` | Specificity: SHARP / VAGUE |
 | `/founder-fit` | `founder-fit-output.md` | Fit: STRONG / MODERATE / WEAK |
