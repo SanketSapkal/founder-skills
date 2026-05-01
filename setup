@@ -148,18 +148,21 @@ explicit BUILD / KILL / PIVOT judgment.
 
 ## Pipeline Sequence
 
-1. `/pressure-test` — Adversarial interrogation (run first)
-2. `/scope-mode` — Calibrate ambition level
-3. `/customer-archetype` — Define the specific customer
-4. `/market-size` — Bottom-up TAM/SAM/SOM
-5. `/startup-canvas` — Business model + value proposition
-6. `/battle-cards` — Competitive intelligence
-7. `/assumption-map` — Risk prioritization
-8. `/pretotype` — Validation experiments
-9. `/verdict` — BUILD / KILL / PIVOT judgment
-10. `/build-brief` — Implementation handoff for coding agents
-11. `/pitch-deck` — Investor pitch narrative
-12. `/gtm-plan` — Go-to-market channel strategy
+1.  `/pressure-test` — Adversarial interrogation (run first)
+2.  `/customer-archetype` — Define the specific customer
+3.  `/founder-fit` — Assess founder-market fit
+4.  `/scope-mode` — Calibrate ambition level
+5.  `/market-size` — Bottom-up TAM/SAM/SOM
+6.  `/startup-canvas` — Business model + value proposition
+7.  `/unit-economics` — CAC / LTV / payback / gross margin
+8.  `/regulatory-risk` — Compliance exposure (regulated industries)
+9.  `/battle-cards` — Competitive intelligence
+10. `/assumption-map` — Risk prioritization
+11. `/pretotype` — Validation experiments
+12. `/verdict` — BUILD / KILL / PIVOT judgment
+13. `/build-brief` — Implementation handoff for coding agents
+14. `/pitch-deck` — Investor pitch narrative
+15. `/gtm-plan` — Go-to-market channel strategy
 
 ---
 
@@ -167,8 +170,8 @@ HEADER
 
     # Core pipeline skills first, then extensions, then pitch, then marketing
     local order=(
-      pressure-test scope-mode customer-archetype market-size
-      startup-canvas battle-cards assumption-map pretotype verdict
+      pressure-test customer-archetype founder-fit scope-mode market-size
+      startup-canvas unit-economics regulatory-risk battle-cards assumption-map pretotype verdict
       build-brief pivot-paths 10x-why-now analogous-cos
       pitch-deck investor-lens elevator-pitch objection-map
       gtm-plan oneliner cold-outreach content-strategy
@@ -209,23 +212,26 @@ explicit BUILD / KILL / PIVOT judgment.
 
 ## Pipeline Sequence
 
-1. `/pressure-test` — Adversarial interrogation (run first)
-2. `/scope-mode` — Calibrate ambition level
-3. `/customer-archetype` — Define the specific customer
-4. `/market-size` — Bottom-up TAM/SAM/SOM
-5. `/startup-canvas` — Business model + value proposition
-6. `/battle-cards` — Competitive intelligence
-7. `/assumption-map` — Risk prioritization
-8. `/pretotype` — Validation experiments
-9. `/verdict` — BUILD / KILL / PIVOT judgment
+1.  `/pressure-test` — Adversarial interrogation (run first)
+2.  `/customer-archetype` — Define the specific customer
+3.  `/founder-fit` — Assess founder-market fit
+4.  `/scope-mode` — Calibrate ambition level
+5.  `/market-size` — Bottom-up TAM/SAM/SOM
+6.  `/startup-canvas` — Business model + value proposition
+7.  `/unit-economics` — CAC / LTV / payback / gross margin
+8.  `/regulatory-risk` — Compliance exposure (regulated industries)
+9.  `/battle-cards` — Competitive intelligence
+10. `/assumption-map` — Risk prioritization
+11. `/pretotype` — Validation experiments
+12. `/verdict` — BUILD / KILL / PIVOT judgment
 
 ---
 
 HEADER
 
     local order=(
-      pressure-test scope-mode customer-archetype market-size
-      startup-canvas battle-cards assumption-map pretotype verdict
+      pressure-test customer-archetype founder-fit scope-mode market-size
+      startup-canvas unit-economics regulatory-risk battle-cards assumption-map pretotype verdict
       build-brief pivot-paths 10x-why-now analogous-cos
       pitch-deck investor-lens elevator-pitch objection-map
       gtm-plan oneliner cold-outreach content-strategy

@@ -11,15 +11,18 @@ An adversarial idea interrogation pipeline that pressure-tests startup ideas bef
 ## Pipeline Sequence
 
 ```
-1. /pressure-test ──> Adversarial interrogation (run first, always)
-2. /scope-mode ────> Calibrate ambition: EXPAND / SELECTIVE / HOLD / REDUCE
-3. /customer-archetype ──> Define the specific customer (upstream of 3 skills)
-4. /market-size ───> Bottom-up TAM / SAM / SOM
-5. /startup-canvas ──> Business model + value proposition
-6. /battle-cards ──> Competitive intelligence
-7. /assumption-map ──> Surface and prioritize riskiest assumptions
-8. /pretotype ─────> Design validation experiments
-9. /verdict ───────> BUILD / KILL / PIVOT synthesis (reads all outputs)
+1.  /pressure-test      ──> Adversarial interrogation (run first, always)
+2.  /customer-archetype ──> Define the specific customer (upstream of modeling)
+3.  /founder-fit        ──> Assess founder-market fit and unfair advantage
+4.  /scope-mode         ──> Calibrate ambition: EXPAND / SELECTIVE / HOLD / REDUCE
+5.  /market-size        ──> Bottom-up TAM / SAM / SOM
+6.  /startup-canvas     ──> Business model + value proposition
+7.  /unit-economics     ──> CAC / LTV / payback / gross margin
+8.  /regulatory-risk    ──> Compliance exposure (run if regulated industry)
+9.  /battle-cards       ──> Competitive intelligence
+10. /assumption-map     ──> Surface and prioritize riskiest assumptions
+11. /pretotype          ──> Design validation experiments
+12. /verdict            ──> BUILD / KILL / PIVOT synthesis (reads all outputs)
 ```
 
 After verdict:
@@ -43,14 +46,16 @@ Sales & marketing (after BUILD verdict):
 ## Dependency Graph
 
 ```
-pressure-test ──┬──> scope-mode ──────> startup-canvas
-                │                           │
-                ├──> customer-archetype ──┬──┤
-                │                        │  ├──> assumption-map ──> pretotype
-                │                        │  └──> battle-cards
-                └────────────────────────┴──> market-size ──> assumption-map
-
-All outputs ──────────────────────────────────> verdict
+pressure-test ──> customer-archetype ──┬──> founder-fit
+                                       ├──> scope-mode ──> startup-canvas ──> unit-economics
+                                       │                         │
+                                       ├──> market-size ─────────┤
+                                       │                         ├──> regulatory-risk (if regulated)
+                                       │                         ├──> battle-cards
+                                       │                         └──> assumption-map ──> pretotype
+                                       └───────────────────────────────────────────────────────┘
+                                                                                               ↓
+All outputs ──────────────────────────────────────────────────────────────────────────> verdict
 verdict (BUILD) ──┬────────────────────────────> build-brief → coding agent
                   ├────────────────────────────> pitch-deck, investor-lens, elevator-pitch, objection-map
                   └────────────────────────────> gtm-plan, oneliner, cold-outreach, content-strategy
@@ -69,10 +74,13 @@ verdict (KILL/PIVOT) ───────────────────�
 | Skill | Output File | Key Rating |
 |---|---|---|
 | `/pressure-test` | `pressure-test-output.md` | Demand: STRONG / WEAK / UNCLEAR |
-| `/scope-mode` | `scope-output.md` | Mode: EXPAND / SELECTIVE / HOLD / REDUCE |
 | `/customer-archetype` | `customer-archetype-output.md` | Specificity: SHARP / VAGUE |
+| `/founder-fit` | `founder-fit-output.md` | Fit: STRONG / MODERATE / WEAK |
+| `/scope-mode` | `scope-output.md` | Mode: EXPAND / SELECTIVE / HOLD / REDUCE |
 | `/market-size` | `market-size-output.md` | Opportunity: LARGE / MEDIUM / SMALL / UNPROVEN |
 | `/startup-canvas` | `startup-canvas-output.md` | Coherence: COHERENT / GAPS / BROKEN |
+| `/unit-economics` | `unit-economics-output.md` | Viability: VIABLE / MARGINAL / BROKEN |
+| `/regulatory-risk` | `regulatory-risk-output.md` | Risk: LOW / MEDIUM / HIGH / BLOCKING |
 | `/battle-cards` | `battle-cards-output.md` | Position: DIFFERENTIATED / CROWDED / UNCLEAR |
 | `/assumption-map` | `assumption-map-output.md` | Risk: concentrated / distributed |
 | `/pretotype` | `pretotype-output.md` | Validation path: CLEAR / UNCLEAR |

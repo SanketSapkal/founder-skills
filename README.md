@@ -16,14 +16,16 @@ This repo:        Interrogate THEN Model
 ## Pipeline
 
 ```
-/pressure-test ──┬──> /scope-mode ──────> /startup-canvas
-                 │                            │
-                 ├──> /customer-archetype ──┬──┤
-                 │                         │  ├──> /assumption-map ──> /pretotype
-                 │                         │  └──> /battle-cards
-                 └─────────────────────────┴──> /market-size ──> /assumption-map
-
-All outputs ──────────────────────────────────────> /verdict
+/pressure-test ──> /customer-archetype ──┬──> /founder-fit
+                                         ├──> /scope-mode ──> /startup-canvas ──> /unit-economics
+                                         │                          │
+                                         ├──> /market-size ─────────┤
+                                         │                          ├──> /regulatory-risk (regulated industries)
+                                         │                          ├──> /battle-cards
+                                         │                          └──> /assumption-map ──> /pretotype
+                                         └──────────────────────────────────────────────────────┘
+                                                                                                ↓
+All outputs ─────────────────────────────────────────────────────────────────────────> /verdict
 /verdict (BUILD) ──┬───────────────────────────────> /build-brief → coding agent
                    ├───────────────────────────────> /pitch-deck, /investor-lens, /elevator-pitch, /objection-map
                    └───────────────────────────────> /gtm-plan, /oneliner, /cold-outreach, /content-strategy
@@ -86,11 +88,14 @@ Or install for specific platforms:
 | Skill | Purpose | Reads | Writes |
 |---|---|---|---|
 | `/pressure-test` | Adversarial interrogation — kill bad ideas early | — | `pressure-test-output.md` |
-| `/scope-mode` | Calibrate ambition: EXPAND / SELECTIVE / HOLD / REDUCE | pressure-test | `scope-output.md` |
-| `/customer-archetype` | Force precise customer definition | pressure-test | `customer-archetype-output.md` |
+| `/customer-archetype` | Force precise customer definition + buying committee mapping | pressure-test | `customer-archetype-output.md` |
+| `/founder-fit` | Assess founder-market fit and unfair advantage | pressure-test, archetype | `founder-fit-output.md` |
+| `/scope-mode` | Calibrate ambition: EXPAND / SELECTIVE / HOLD / REDUCE | pressure-test, archetype | `scope-output.md` |
 | `/market-size` | Bottom-up TAM / SAM / SOM | pressure-test, archetype | `market-size-output.md` |
 | `/startup-canvas` | Business model + value proposition | pressure-test, archetype, scope | `startup-canvas-output.md` |
-| `/battle-cards` | Competitive intelligence + positioning | archetype, canvas | `battle-cards-output.md` |
+| `/unit-economics` | CAC / LTV / payback / gross margin — viability math | canvas, archetype, market-size, gtm-plan | `unit-economics-output.md` |
+| `/regulatory-risk` | Compliance exposure and licensing requirements | canvas, archetype, market-size | `regulatory-risk-output.md` |
+| `/battle-cards` | Competitive intelligence + switching costs + positioning | archetype, canvas | `battle-cards-output.md` |
 | `/assumption-map` | Surface and prioritize riskiest assumptions | canvas, market-size | `assumption-map-output.md` |
 | `/pretotype` | Design validation experiments | assumption-map | `pretotype-output.md` |
 | `/verdict` | **BUILD / KILL / PIVOT** synthesis | ALL outputs | `verdict-output.md` |
@@ -123,15 +128,18 @@ All skill outputs are saved to `./founder-outputs/`. Each skill reads
 prior outputs from this directory to build on earlier analysis.
 
 ### Pipeline Sequence
-1. `/pressure-test` — Adversarial interrogation (run first)
-2. `/scope-mode` — Calibrate ambition level
-3. `/customer-archetype` — Define the specific customer
-4. `/market-size` — Bottom-up TAM/SAM/SOM
-5. `/startup-canvas` — Business model + value proposition
-6. `/battle-cards` — Competitive intelligence
-7. `/assumption-map` — Risk prioritization
-8. `/pretotype` — Validation experiments
-9. `/verdict` — BUILD / KILL / PIVOT judgment
+1.  `/pressure-test` — Adversarial interrogation (run first)
+2.  `/customer-archetype` — Define the specific customer
+3.  `/founder-fit` — Assess founder-market fit
+4.  `/scope-mode` — Calibrate ambition level
+5.  `/market-size` — Bottom-up TAM/SAM/SOM
+6.  `/startup-canvas` — Business model + value proposition
+7.  `/unit-economics` — CAC / LTV / payback / gross margin
+8.  `/regulatory-risk` — Compliance exposure (regulated industries)
+9.  `/battle-cards` — Competitive intelligence
+10. `/assumption-map` — Risk prioritization
+11. `/pretotype` — Validation experiments
+12. `/verdict` — BUILD / KILL / PIVOT judgment
 ```
 
 ## Books Referenced

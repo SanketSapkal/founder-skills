@@ -12,10 +12,12 @@ After pressure-test passes, calibrate the scope before modeling begins. Too broa
 
 Read from `./founder-outputs/` before proceeding:
 - `pressure-test-output.md` — demand verdict and evidence (recommends scope mode based on findings)
+- `customer-archetype-output.md` — customer specificity (SHARP archetype enables EXPAND; VAGUE archetype forces REDUCE)
 
-If pressure-test output exists, recommend a scope mode based on the demand verdict:
-- STRONG demand → consider EXPAND or SELECTIVE
-- WEAK demand → recommend REDUCE (find the wedge)
+If both outputs exist, recommend a scope mode based on the combined signal:
+- STRONG demand + SHARP archetype → consider EXPAND or SELECTIVE
+- STRONG demand + VAGUE archetype → recommend HOLD (nail the customer before expanding)
+- WEAK demand → recommend REDUCE regardless of archetype specificity (find the wedge)
 - UNCLEAR demand → recommend HOLD (clarify before expanding)
 
 ## Frameworks

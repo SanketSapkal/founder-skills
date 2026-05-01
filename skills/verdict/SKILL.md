@@ -1,6 +1,6 @@
 ---
 name: verdict
-description: This skill should be used when the user says "should I build this", "give me a verdict", "is this worth it", "final verdict", "go or no-go", "make the call", "what's the verdict", or has completed multiple founder-skills pipeline steps and wants a synthesis. Reads all founder-outputs files and produces an explicit BUILD / KILL / PIVOT judgment with structured reasoning. No other skills repo has this capability.
+description: This skill should be used when the user says "should I build this", "give me a verdict", "is this worth it", "final verdict", "go or no-go", "make the call", "what's the verdict", "kill or build", or has completed multiple founder-skills pipeline steps and wants a synthesis. Reads all founder-outputs files and produces an explicit BUILD / KILL / PIVOT judgment with structured reasoning. No other skills repo has this capability.
 version: 0.1.0
 ---
 
@@ -21,6 +21,9 @@ Read ALL files from `./founder-outputs/` before proceeding:
 - `battle-cards-output.md` — competitive position
 - `assumption-map-output.md` — risk concentration
 - `pretotype-output.md` — validation path clarity
+- `founder-fit-output.md` — founder-market fit (if run)
+- `unit-economics-output.md` — unit economics viability (if run)
+- `regulatory-risk-output.md` — regulatory exposure (if run)
 
 If some outputs are missing, proceed with available data but note the gaps and reduce confidence accordingly. The minimum required input is `pressure-test-output.md` — if that does not exist, tell the user to run `/pressure-test` first.
 
@@ -33,7 +36,7 @@ If some outputs are missing, proceed with available data but note the gaps and r
 
 1. **Read all available output files.** Scan `./founder-outputs/` and read every file present. Note which files exist and which are missing.
 
-2. **Score six dimensions.** For each dimension, assign a discrete rating based on the evidence in the output files:
+2. **Score seven dimensions.** For each dimension, assign a discrete rating based on the evidence in the output files:
 
    | Dimension | Source | Ratings |
    |---|---|---|
@@ -43,6 +46,11 @@ If some outputs are missing, proceed with available data but note the gaps and r
    | Risk Concentration | `assumption-map-output.md` | Name the single assumption that kills this if wrong |
    | Competitive Position | `battle-cards-output.md` | DIFFERENTIATED / CROWDED / UNCLEAR |
    | Validation Path | `pretotype-output.md` | CLEAR / UNCLEAR |
+   | Founder-Market Fit | `founder-fit-output.md` | STRONG / MODERATE / WEAK / UNSCORED |
+
+   Additional inputs when available:
+   - `unit-economics-output.md` — flag if BROKEN; a broken unit model downgrades Model Coherence
+   - `regulatory-risk-output.md` — flag if HIGH or BLOCKING; a BLOCKING regulatory risk can override a BUILD verdict
 
    If a source file is missing, mark the dimension as UNSCORED and note it.
 
@@ -85,6 +93,7 @@ File format:
 | Risk Concentration | [named assumption] | [why it's fatal if wrong] |
 | Competitive Position | [rating] | [one-line evidence] |
 | Validation Path | [rating] | [one-line evidence] |
+| Founder-Market Fit | [STRONG / MODERATE / WEAK / UNSCORED] | [one-line evidence or "Not run"] |
 
 ## Kill Assumption
 **[The single assumption that kills this if wrong]**
