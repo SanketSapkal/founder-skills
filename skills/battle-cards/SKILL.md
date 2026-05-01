@@ -1,6 +1,6 @@
 ---
 name: battle-cards
-description: This skill should be used when the user says "who are my competitors", "competitive landscape", "how am I different", "competitive analysis", "positioning", "competitive advantage", "what else is out there", or needs competitive intelligence with real competitor data, feature matrices, pricing landscapes, and positioning analysis.
+description: This skill should be used when the user says "who are my competitors", "competitive landscape", "how am I different", "competitive analysis", "positioning", "competitive advantage", "what else is out there", "moat", "defensibility", "switching costs", or needs competitive intelligence with real competitor data, feature matrices, pricing landscapes, and positioning analysis.
 version: 0.1.0
 ---
 
@@ -54,7 +54,22 @@ If `customer-archetype-output.md` is missing, recommend the user run `/customer-
 
 7. **Write positioning statement.** Use Dunford's format: "For [target customer] who [need], [product] is the [category] that [key benefit], unlike [competitor] which [limitation]." Test it: does the category make sense? Would the customer recognize it?
 
-8. **Write full output** to `./founder-outputs/battle-cards-output.md`. Display a concise summary in chat: top 3 competitors, positioning statement, key gap identified, and note that full output is saved to the file.
+8. **Analyze switching costs.** For each incumbent competitor, assess what it costs a customer to switch away from them:
+   - **Data lock-in** — is historical data trapped in the incumbent's system?
+   - **Workflow integration** — how deeply is the incumbent embedded in daily operations?
+   - **Contract lock-in** — multi-year contracts, exit clauses
+   - **Training investment** — how much has the customer invested in learning the incumbent?
+   - **Network effects** — does switching lose them a network (e.g., marketplace, collaboration)?
+   - High switching costs mean: longer sales cycles, higher CAC, and require a 10x pain reduction to displace
+
+9. **Explain why incumbents ignore this segment.** Incumbents are not stupid — they chose not to serve this segment. Understand why:
+   - Too small? (segment size below their minimum contract)
+   - Too complex to serve? (requires customization they can't justify)
+   - Cannibalization risk? (would undercut their existing pricing)
+   - Wrong channel? (incumbent is field-sales, segment needs self-serve)
+   - This explanation is your entry point — it defines where you are safe to build without triggering incumbent response.
+
+10. **Write full output** to `./founder-outputs/battle-cards-output.md`. Display a concise summary in chat: top 3 competitors, positioning statement, key gap identified, and note that full output is saved to the file.
 
 ## Red Flags
 
@@ -106,6 +121,16 @@ File format:
 
 ## Positioning Statement
 > For [target customer] who [need], [product] is the [category] that [key benefit], unlike [competitor] which [limitation].
+
+## Switching Cost Analysis
+| Competitor | Data Lock-in | Workflow Depth | Contract Lock-in | Network Effects | Overall Switching Cost |
+|---|---|---|---|---|---|
+| [Name] | [High/Med/Low] | [High/Med/Low] | [High/Med/Low] | [Yes/No] | [High/Med/Low] |
+
+**Implication:** [How high switching costs affect your go-to-market — expected sales cycle length, required pain threshold to displace]
+
+## Why Incumbents Ignore This Segment
+[Explain the structural reason each major incumbent does not serve this segment well — and whether that gap is durable or temporary]
 
 ## Competitive Moat Assessment
 **Current defensibility:** [Strong / Moderate / Weak]

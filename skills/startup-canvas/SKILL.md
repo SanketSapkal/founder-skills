@@ -51,7 +51,13 @@ If `pressure-test-output.md` or `customer-archetype-output.md` are missing, tell
 
 9. **Unfair advantage.** What cannot be easily copied or bought? Acceptable: proprietary data, network effects, switching costs, regulatory moats, founder-market fit with deep domain expertise. Not acceptable: "first mover advantage" (rarely durable), "our team" (vague), "our technology" (unless truly novel).
 
-10. **Coherence check.** Review the complete canvas for internal consistency:
+10. **Unit economics sanity check.** Before declaring coherence, run the basic math:
+    - **Gross margin estimate.** Revenue per customer minus estimated COGS (hosting, third-party APIs, support, onboarding). If gross margin is below 50% for SaaS or 30% for marketplace, flag it.
+    - **CAC vs. price.** If the sales motion required to acquire a customer (self-serve / inside sales / field sales) costs more than 1/3 of first-year revenue, the business starts upside-down.
+    - **Payback sanity.** At current pricing and cost, how many months until CAC is recovered? Over 24 months is a structural problem.
+    - Surface any red flags here. A full unit economics calculation is available via `/unit-economics`.
+
+11. **Coherence check.** Review the complete canvas for internal consistency:
     - Do the problems match the customer?
     - Does the UVP address the #1 problem?
     - Does pricing align with workaround cost?
@@ -59,7 +65,7 @@ If `pressure-test-output.md` or `customer-archetype-output.md` are missing, tell
     - Does the cost structure support the pricing?
     Flag any gaps or contradictions.
 
-11. **Write full output** to `./founder-outputs/startup-canvas-output.md`. Display a concise summary in chat: UVP, pricing model, key metric, coherence rating, and note that full output is saved to the file.
+12. **Write full output** to `./founder-outputs/startup-canvas-output.md`. Display a concise summary in chat: UVP, pricing model, key metric, coherence rating, and note that full output is saved to the file.
 
 ## Output
 
@@ -110,6 +116,12 @@ File format:
 
 ## Unfair Advantage
 [What cannot be easily copied, with explanation]
+
+## Unit Economics Sanity Check
+**Estimated gross margin:** [X]%  — [Healthy / Marginal / Red flag]
+**CAC vs. first-year revenue:** [CAC is X% of ACV — sustainable / concerning]
+**Estimated payback period:** [X months — healthy / concerning]
+**Flags:** [List any structural issues, or "None — run /unit-economics for full analysis"]
 
 ## Coherence Check
 **Rating:** [COHERENT / GAPS / BROKEN]

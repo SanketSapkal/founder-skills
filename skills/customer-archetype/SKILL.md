@@ -1,6 +1,6 @@
 ---
 name: customer-archetype
-description: This skill should be used when the user says "who is my customer", "define my user", "customer profile", "target customer", "buyer persona", "who am I selling to", "who would buy this", or needs to define a specific customer before market sizing, canvas, or competitive analysis. Forces precise customer definition upstream of all modeling skills.
+description: This skill should be used when the user says "who is my customer", "define my user", "customer profile", "target customer", "buyer persona", "ICP", "ideal customer profile", "who am I selling to", "who would buy this", or needs to define a specific customer before market sizing, canvas, or competitive analysis. Forces precise customer definition upstream of all modeling skills.
 version: 0.1.0
 ---
 
@@ -48,12 +48,15 @@ If pressure-test output exists, use its evidence as the starting point. If not, 
    - "Who do they trust for recommendations?"
    - This directly informs go-to-market channels downstream.
 
-6. **Classify decision role.** Determine whether the archetype is:
-   - **Buyer** — has budget authority
-   - **User** — daily operator, may not have budget authority
-   - **Champion** — internal advocate who pushes for adoption
-   - **Blocker** — person who can kill the deal (IT, legal, procurement)
-   - One person can hold multiple roles. Identify the primary role.
+6. **Map the buying committee (B2B).** For any B2B product, the person using the product is rarely the person signing the check. Map all four roles:
+   - **Economic buyer** — holds the budget and signs the contract. What do they care about? (ROI, headcount reduction, risk reduction)
+   - **End user** — operates the product daily. What do they care about? (ease of use, time saved, workflow fit)
+   - **Champion** — internal advocate who drives the purchase. What motivates them to push for this? (career advancement, solving their team's pain)
+   - **Blocker** — person who can kill the deal without being the buyer. Common blockers: IT (security/integration), Legal (compliance/risk), Procurement (vendor process), Finance (budget approval)
+
+   Identify which role the primary archetype fills. If the primary archetype is the end user but not the economic buyer, also define who the economic buyer is — they will be the real decision-maker.
+
+   **B2C note:** If the product is B2C, skip buying committee mapping and focus on: who influences the decision (social proof, family, peers) and whether the buyer and user are the same person.
 
 7. **Generate hypothetical quotes.** Write 2-3 specific quotes this person would say about the problem. Not generic ("this is frustrating") — specific ("I spend every Friday afternoon reconciling shipment data across three spreadsheets, and I still miss errors that cost us $2K a month in chargebacks").
 
@@ -99,10 +102,14 @@ File format:
 **Communities:** [Slack groups, forums, events]
 **Trusted sources:** [Who they ask for recommendations]
 
-## Decision Role
-**Primary:** [Buyer / User / Champion / Blocker]
-**Budget authority:** [Yes / No / Shared]
-**Other stakeholders:** [Who else is involved in the decision]
+## Buying Committee (B2B)
+**Economic buyer:** [Title, what they care about]
+**End user:** [Title — same as archetype if the archetype is the user]
+**Champion:** [Who will advocate internally, and why]
+**Blockers:** [IT / Legal / Procurement / Finance — and their specific objections]
+
+**Primary archetype role:** [Economic buyer / End user / Champion]
+**Budget authority:** [Yes / No / Shared with economic buyer]
 
 ## Hypothetical Quotes
 > "[Specific quote about the problem]"

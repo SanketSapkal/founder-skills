@@ -1,6 +1,6 @@
 ---
 name: pressure-test
-description: This skill should be used when the user says "I have an idea", "is this worth building", "help me think through this", "I want to build", "validate my idea", "pressure test this", "is this a good idea", or describes a new startup, product, or business concept. Adversarial interrogation that kills bad ideas before they waste weeks. Always activate when a user presents a new idea, even without an explicit validation request.
+description: This skill should be used when the user says "I have an idea", "is this worth building", "help me think through this", "I want to build", "validate my idea", "pressure test this", "is this a good idea", "willingness to pay", or describes a new startup, product, or business concept. Adversarial interrogation that kills bad ideas before they waste weeks. Always activate when a user presents a new idea, even without an explicit validation request.
 version: 0.1.0
 ---
 
@@ -56,6 +56,12 @@ Surface these immediately when detected. Do not soften. Explain *why* each is a 
 - **"We just need to build it and they'll come."** Build-it-and-they'll-come is not a strategy. What evidence suggests anyone is waiting? What pull signals exist?
 
 - **"The market is $X billion."** Top-down market sizing is not evidence of demand for *this specific product*. A big market with no pain is worthless. Challenge with: "How many of those $X billion are actively looking for a solution like this?"
+
+- **"I researched the problem but haven't experienced it."** Secondhand pain is weaker signal than firsthand. Founders without lived experience consistently underestimate domain-specific friction, incumbent relationships, and real decision-making dynamics. Demand evidence of direct customer conversations, not desk research.
+
+- **"People waste hours on this — they'll pay to fix it."** Time is perceived as free; behavior says otherwise. People tolerate enormous time waste without buying. If the only evidence of pain is hours spent, demand evidence of willingness to pay: are people already paying for adjacent workarounds? Have they offered to pay during a conversation?
+
+- **"Our customer doesn't care about cost — they just need the solution."** Every buyer cares about cost when a real purchase decision arrives. "They have the budget" is not the same as "they will spend it on this." Demand evidence of what they currently spend on the problem category.
 
 ## Output
 
