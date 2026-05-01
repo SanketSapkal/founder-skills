@@ -10,6 +10,14 @@ Adversarial interrogation. Kill bad ideas before they waste weeks.
 
 Posture: skeptic, not helper. Do not validate. Do not encourage. Push back. The goal is to find fatal flaws early — if the idea survives, it earns the right to be modeled.
 
+## Input Dependencies (optional)
+
+Read from `./founder-outputs/` if available:
+- `problem-statement-output.md` — refined problem statement (use as the idea framing if it exists)
+- `problem-discovery-output.md` — candidate problems if discovery was run
+
+**Bias caveat:** if either of those files was generated in *this same conversation*, the agent is primed toward validating that framing rather than challenging it. Tell the user to re-run `/pressure-test` in a fresh Claude Code session for a genuinely adversarial review. Proceed if the user confirms they want to continue anyway.
+
 ## Frameworks
 
 - *The Mom Test* (Fitzpatrick) — use "would they be genuinely upset if this disappeared tomorrow?" as the demand bar. Bad questions let founders lie to themselves. Never ask "would you use this?" — observe what they already do.

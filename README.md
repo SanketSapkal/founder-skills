@@ -16,21 +16,23 @@ This repo:        Interrogate THEN Model
 ## Pipeline
 
 ```
-/pressure-test ──> /customer-archetype ──┬──> /founder-fit
-                                         ├──> /scope-mode ──> /startup-canvas ──> /unit-economics
-                                         │                          │
-                                         ├──> /market-size ─────────┤
-                                         │                          ├──> /regulatory-risk (regulated industries)
-                                         │                          ├──> /battle-cards
-                                         │                          └──> /assumption-map ──> /pretotype
-                                         └──────────────────────────────────────────────────────┘
-                                                                                                ↓
-All outputs ─────────────────────────────────────────────────────────────────────────> /verdict
+[/problem-discovery] ──> [/problem-statement] ──> /pressure-test ──> /customer-archetype ──┬──> /founder-fit
+   (optional, if no                                    ↑                                    ├──> /scope-mode ──> /startup-canvas ──> /unit-economics
+    specific idea yet)                          ⚠ run in fresh                              │                          │
+                                                 conversation                               ├──> /market-size ─────────┤
+                                                 to avoid bias                              │                          ├──> /regulatory-risk (regulated industries)
+                                                                                            │                          ├──> /battle-cards
+                                                                                            │                          └──> /assumption-map ──> /pretotype
+                                                                                            └──────────────────────────────────────────────────────┘
+                                                                                                                                                  ↓
+All outputs ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────> /verdict
 /verdict (BUILD) ──┬───────────────────────────────> /build-brief → coding agent
                    ├───────────────────────────────> /pitch-deck, /investor-lens, /elevator-pitch, /objection-map
                    └───────────────────────────────> /gtm-plan, /oneliner, /cold-outreach, /content-strategy
 /verdict (KILL/PIVOT) ─────────────────────────────> /pivot-paths
 ```
+
+> **⚠ Bias warning:** `/problem-discovery` and `/problem-statement` help **shape** the problem — they are not adversarial. After running them, switch to a **fresh Claude Code conversation** before running `/pressure-test`. Otherwise the agent that just helped you frame the problem will be biased toward validating it, undercutting the adversarial review. This is a fundamental limit of LLM self-review, not a Claude-specific issue.
 
 Every skill writes a structured output file to `./founder-outputs/`. Downstream skills read those files. `/verdict` reads all of them.
 
@@ -87,7 +89,9 @@ Or install for specific platforms:
 
 | Skill | Purpose | Reads | Writes |
 |---|---|---|---|
-| `/pressure-test` | Adversarial interrogation — kill bad ideas early | — | `pressure-test-output.md` |
+| `/problem-discovery` | Surface candidate problems when no specific idea exists yet | — | `problem-discovery-output.md` |
+| `/problem-statement` | Polish a vague problem into a precise JTBD statement | problem-discovery (optional) | `problem-statement-output.md` |
+| `/pressure-test` | Adversarial interrogation — kill bad ideas early | problem-statement (optional) | `pressure-test-output.md` |
 | `/customer-archetype` | Force precise customer definition + buying committee mapping | pressure-test | `customer-archetype-output.md` |
 | `/founder-fit` | Assess founder-market fit and unfair advantage | pressure-test, archetype | `founder-fit-output.md` |
 | `/scope-mode` | Calibrate ambition: EXPAND / SELECTIVE / HOLD / REDUCE | pressure-test, archetype | `scope-output.md` |
@@ -128,7 +132,9 @@ All skill outputs are saved to `./founder-outputs/`. Each skill reads
 prior outputs from this directory to build on earlier analysis.
 
 ### Pipeline Sequence
-1.  `/pressure-test` — Adversarial interrogation (run first)
+0a. `/problem-discovery` — (optional) Surface candidate problems if no idea yet
+0b. `/problem-statement` — (optional) Polish a vague problem before pressure-testing
+1.  `/pressure-test` — Adversarial interrogation (run first if you have an idea)
 2.  `/customer-archetype` — Define the specific customer
 3.  `/founder-fit` — Assess founder-market fit
 4.  `/scope-mode` — Calibrate ambition level
@@ -140,6 +146,8 @@ prior outputs from this directory to build on earlier analysis.
 10. `/assumption-map` — Risk prioritization
 11. `/pretotype` — Validation experiments
 12. `/verdict` — BUILD / KILL / PIVOT judgment
+
+> **Bias warning:** if you run `/problem-discovery` or `/problem-statement`, switch to a fresh Claude Code conversation before `/pressure-test` — otherwise the agent that helped frame the problem will be biased toward validating it.
 ```
 
 ## Books Referenced
